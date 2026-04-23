@@ -1,0 +1,45 @@
+name: Build frontend
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'phase-1-docker/applications/frontend/**'
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: tokarenkokonstantin/frontend
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GHCR_TOKEN }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          context: ./phase-1-docker/applications/frontend
+          push: true
+          tags: ghcr.io/${{ env.IMAGE_NAME }}:${{ github.sha }}
+
+      - name: Update image tag in manifest
+        run: |
+          sed -i "s|image: .*frontend.*|image: ghcr.io/${{ env.IMAGE_NAME }}:${{ github.sha }}|" phase-2-k8s/frontend.yaml
+          git config user.email "actions@github.com"
+          git config user.name "GitHub Actions"
+          git add phase-2-k8s/frontend.yaml
+          git commit -m "ci: update frontend image to ${{ github.sha }}"
+          git push
