@@ -14,7 +14,7 @@
         enabled: true
     - name: Install docker
       apt:
-        name: docker.io
+        name: docker-ce
         state: present
         update_cache: true
     - name: Ensure docker is running
@@ -28,3 +28,14 @@
         name: fail2ban
         state: started
         enabled: true
+    - name: Install required packages
+      apt:
+        name:
+          - nginx
+          - docker-ce
+          - fail2ban
+          - ufw
+          - certbot
+          - wireguard-tools
+        state: present
+        update_cache: true
