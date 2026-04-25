@@ -45,9 +45,9 @@ docker compose up --build
 ## Roadmap
 
 - [x] Phase 1: Docker + Docker Compose
-- [ ] Phase 2: Kubernetes (K3s, Helm, Ingress)
-- [ ] Phase 3: CI/CD (Jenkins, ArgoCD)
-- [ ] Phase 4: Monitoring (Prometheus, Grafana)
-- [ ] Phase 5: Security (Vault, Trivy)
-- [ ] Phase 6: Databases (PostgreSQL Operator)
+- [x] Phase 2: Kubernetes (K3s, Helm, Ingress)
+- [x] Phase 3: CI/CD (GitHub Actions, ArgoCD)
+- [x] Phase 4: Monitoring (Prometheus, Grafana)
+- [x] Phase 5: Terraform + Ansible
+- [ ] Phase 6: Security (Vault, Trivy)
 - [ ] Phase 7: High Availability
