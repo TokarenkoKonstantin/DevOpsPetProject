@@ -1,0 +1,30 @@
+---
+- name: Setup VPS
+  hosts: vps
+  become: true
+
+  tasks:
+    - name: Show OS info
+      debug:
+        msg: "OS: {{ ansible_distribution }} {{ ansible_distribution_version }}"
+    - name: Ensure nginx is running
+      service:
+        name: nginx
+        state: started
+        enabled: true
+    - name: Install docker
+      apt:
+        name: docker.io
+        state: present
+        update_cache: true
+    - name: Ensure docker is running
+      service:
+        name: docker
+        state: started
+        enabled: true
+
+    - name: Ensure fail2ban is running
+      service:
+        name: fail2ban
+        state: started
+        enabled: true
