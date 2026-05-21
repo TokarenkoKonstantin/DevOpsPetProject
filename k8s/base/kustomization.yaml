@@ -18,4 +18,5 @@ resources:
   - user-service.yaml
 
   - ingress.yaml
+  - postgres.yaml
 
