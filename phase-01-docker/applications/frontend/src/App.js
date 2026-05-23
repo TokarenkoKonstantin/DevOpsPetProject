@@ -164,8 +164,15 @@ function CartSidebar({ cart, onClose, onRemove, onQuantityChange, user, onChecko
 function ProductCard({ product, index, onAddToCart }) {
   return (
     <div className="product-card">
-      <div className="product-card-image" style={{ background: GRADIENTS[index % GRADIENTS.length] }}>
-        <span className="product-icon">{getProductIcon(product.name)}</span>
+      <div
+        className="product-card-image"
+        style={{ background: product.image ? '#111827' : GRADIENTS[index % GRADIENTS.length] }}
+      >
+        {product.image ? (
+          <img src={product.image} alt={product.name} className="product-img" />
+        ) : (
+          <span className="product-icon">{getProductIcon(product.name)}</span>
+        )}
         <div className="product-stock-badge">
           {product.stock > 0 ? `${product.stock} in stock` : 'Out of stock'}
         </div>
