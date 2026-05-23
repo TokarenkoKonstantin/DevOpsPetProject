@@ -15,10 +15,24 @@ spec:
     spec:
       containers:
         - name: product-service
-          image: ghcr.io/tokarenkokonstantin/product-service:b99a0a6aa6a7c314443019dacf4c28b71ce85c4a
+          image: ghcr.io/tokarenkokonstantin/product-service:a0faf77cc6a69dcbef327a666004b7622910bedc
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            failureThreshold: 3
           env:
             - name: PORT
               value: "8080"

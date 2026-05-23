@@ -37,9 +37,9 @@ jobs:
 
       - name: Update image tag in manifest
         run: |
-          sed -i "s|image: .*product-service.*|image: ghcr.io/${{ env.IMAGE_NAME }}:${{ github.sha }}|" phase-02-k8s/product-service.yaml
+          sed -i "s|image: .*product-service.*|image: ghcr.io/${{ env.IMAGE_NAME }}:${{ github.sha }}|" k8s/base/product-service.yaml
           git config user.email "actions@github.com"
           git config user.name "GitHub Actions"
-          git add phase-02-k8s/product-service.yaml
+          git add k8s/base/product-service.yaml
           git commit -m "ci: update product-service image to ${{ github.sha }}"
           git push
