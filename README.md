@@ -75,6 +75,15 @@ graph TB
 
 ---
 
+## 🛍️ Приложение — CloudShop
+
+![CloudShop Frontend](screenshots/frontend.png)
+
+> Dark-theme e-commerce: каталог продуктов · корзина · авторизация (JWT) · история заказов  
+> Стек: React → Nginx → Go (Products) → FastAPI (Orders, Users) → PostgreSQL
+
+---
+
 ## Стек технологий
 
 | Категория | Технологии |
