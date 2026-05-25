@@ -3,10 +3,17 @@ kind: Ingress
 metadata:
   name: ecommerce-ingress
   namespace: ecommerce
+  annotations:
+    cert-manager.io/cluster-issuer: selfsigned-issuer
 spec:
   ingressClassName: nginx
+  tls:
+    - hosts:
+        - shop.local
+      secretName: cloud-shop-tls
   rules:
-    - http:
+    - host: shop.local
+      http:
         paths:
           - path: /
             pathType: Prefix
