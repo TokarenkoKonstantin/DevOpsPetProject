@@ -1,0 +1,22 @@
+name: Mirror images to ghcr.io
+on:
+  workflow_dispatch:
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+    steps:
+      - name: Login to ghcr.io
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Mirror postgres:15-alpine
+        run: |
+          docker pull postgres:15-alpine
+          docker tag postgres:15-alpine ghcr.io/tokarenkokonstantin/postgres:15-alpine
+          docker push ghcr.io/tokarenkokonstantin/postgres:15-alpine
