@@ -20,3 +20,6 @@ jobs:
           docker pull postgres:15-alpine
           docker tag postgres:15-alpine ghcr.io/tokarenkokonstantin/postgres:15-alpine
           docker push ghcr.io/tokarenkokonstantin/postgres:15-alpine
+          docker pull quay.io/jetstack/cert-manager-cainjector:v1.16.3
+          docker tag quay.io/jetstack/cert-manager-cainjector:v1.16.3 ghcr.io/tokarenkokonstantin/cert-manager-cainjector:v1.16.3
+          docker push ghcr.io/tokarenkokonstantin/cert-manager-cainjector:v1.16.3
